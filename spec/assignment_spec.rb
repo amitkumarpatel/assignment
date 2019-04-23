@@ -13,14 +13,15 @@ describe 'assignment' do
     $stdin = STDIN
   end
 	
-	it "should contain 10 digits" do
-    expect(capture_phonenumber.length).to be == 10
-  end
+	context "should be a mobile number" do
+		it "should contain 10 digits" do
+	    expect(capture_phonenumber.length).to be == 10
+	  end
 
-  	it "should contain 10 digits" do
-		expect(capture_phonenumber).not_to include( '0' )
-		expect(capture_phonenumber).not_to include( '1' )
-  end
-
+	  	it "should contain 10 digits" do
+			expect(capture_phonenumber).not_to include( '0' )
+			expect(capture_phonenumber).not_to include( '1' )
+	  end
+	end
 
 end
