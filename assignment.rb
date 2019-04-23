@@ -25,126 +25,196 @@ File.open("./dictionary.txt", "r") do |f|
   end
 end
 words = []
-#print combination_of_digits.inspect
-combination_of_digits.each do |characters|
-	if characters.length == 3
-		#(0..characters.length - 1).each do |index|
-			int_mapping_char[characters[0].to_i].each do |i|
-				int_mapping_char[characters[1].to_i].each do |j|
-					int_mapping_char[characters[2].to_i].each do |k|
-						words << i+j+k if load_words_from_dictionary.include?( (i+j+k).upcase)
-					end
-				end
-			end
-		#end
-	# elsif characters.length == 4
-	# 	int_mapping_char[characters[0].to_i].each do |i|
-	# 		int_mapping_char[characters[1].to_i].each do |j|
-	# 			int_mapping_char[characters[2].to_i].each do |k|
-	# 				int_mapping_char[characters[3].to_i].each do |l|
-	# 					words << i+j+k+l if load_words_from_dictionary.include?((i+j+k+l).upcase)
-	# 				end
-	# 			end
-	# 		end
-	# 	end
-	# elsif characters.length == 5
-	# 	int_mapping_char[characters[0].to_i].each do |i|
-	# 		int_mapping_char[characters[1].to_i].each do |j|
-	# 			int_mapping_char[characters[2].to_i].each do |k|
-	# 				int_mapping_char[characters[3].to_i].each do |l|
-	# 					int_mapping_char[characters[4].to_i].each do |m|
-	# 						words << i+j+k+l+m if load_words_from_dictionary.include?((i+j+k+l+m).upcase)
-	# 					end
-	# 				end		
-	# 			end
-	# 		end
-	# 	end	
-	# elsif characters.length == 6 
-	# 	int_mapping_char[characters[0].to_i].each do |i|
-	# 		int_mapping_char[characters[1].to_i].each do |j|
-	# 			int_mapping_char[characters[2].to_i].each do |k|
-	# 				int_mapping_char[characters[3].to_i].each do |l|
-	# 					int_mapping_char[characters[4].to_i].each do |m|
-	# 						int_mapping_char[characters[5].to_i].each do |n|
-	# 							words << i+j+k+l+m+n if load_words_from_dictionary.include?((i+j+k+l+m+n).upcase)
-	# 						end
-	# 					end
-	# 				end
-	# 			end
-	# 		end
-	# 	end
-	# elsif characters.length == 7
-	# 	int_mapping_char[characters[0].to_i].each do |i|
-	# 		int_mapping_char[characters[1].to_i].each do |j|
-	# 			int_mapping_char[characters[2].to_i].each do |k|
-	# 				int_mapping_char[characters[3].to_i].each do |l|
-	# 					int_mapping_char[characters[4].to_i].each do |m|
-	# 						int_mapping_char[characters[5].to_i].each do |n|
-	# 							int_mapping_char[characters[6].to_i].each do |o|
-	# 								words << i+j+k+l+m+n+o if load_words_from_dictionary.include?((i+j+k+l+m+n+o).upcase)
-	# 							end
-	# 						end
-	# 					end
-	# 				end
-	# 			end
-	# 		end
-	# 	end
-	# elsif characters.length == 10
-	# 	int_mapping_char[characters[0].to_i].each do |i|
-	# 		int_mapping_char[characters[1].to_i].each do |j|
-	# 			int_mapping_char[characters[2].to_i].each do |k|
-	# 				int_mapping_char[characters[3].to_i].each do |l|
-	# 					int_mapping_char[characters[4].to_i].each do |m|
-	# 						int_mapping_char[characters[5].to_i].each do |n|
-	# 							int_mapping_char[characters[6].to_i].each do |o|
-	# 								int_mapping_char[characters[7].to_i].each do |p|
-	# 									int_mapping_char[characters[8].to_i].each do |q|
-	# 										int_mapping_char[characters[9].to_i].each do |r|
-	# 											words << i+j+k+l+m+n+o+p+q+r if load_words_from_dictionary.include?(((i+j+k+l+m+n+o+p+q+r).upcase))
-	# 										end
-	# 									end
-	# 								end
-	# 							end
-	# 						end
-	# 					end
-	# 				end
-	# 			end
-	# 		end
-	# 	end
-	end				
-end
 
+words_with_3, words_with_4 = [], []
 combi_with_10 = combination_of_digits.select{|char| char if char.length == 10}
 combi_with_7 = combination_of_digits.select{|char| char if char.length == 7}
+combi_with_6 = combination_of_digits.select{|char| char if char.length == 6}
 combi_with_5 = combination_of_digits.select{|char| char if char.length == 5}
 combi_with_4 = combination_of_digits.select{|char| char if char.length == 4}
+combi_with_3 = combination_of_digits.select{|char| char if char.length == 3}
+puts combination_of_digits.inspect
+#puts combi_with_3.inspect
 combi_with_10 = combi_with_10[0]
-combi_with_7 = combi_with_7[0]
-combi_with_5 = combi_with_5[0]
-combi_with_4 = combi_with_4[0]
-load_words_from_dictionary.each do |word|
-	if word.length == 4
-		if int_mapping_char[combi_with_4[0].to_i].include?(word[0].downcase) && int_mapping_char[combi_with_4[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi_with_4[2].to_i].include?(word[2].downcase)  && int_mapping_char[combi_with_4[3].to_i].include?(word[3].downcase)
-			puts word
+	first_str = []
+	sec_str = []
+	third_str = []
+	fourth_str = []
+	fifth_str = []
+	sixth_str = []
+	combination_of_digits[0..2].each_with_index do |combi, index|
+		load_words_from_dictionary.each do |word|
+			if  combi.length == 3 && word.length == combi.length
+				if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase)
+					first_str[index] = [] if first_str[index].nil?
+					first_str[index] << word
+				end
+			elsif combi.length == 4 && word.length == combi.length
+				if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase) && int_mapping_char[combi[3].to_i].include?(word[3].downcase)
+					first_str[index] = [] if first_str[index].nil?
+					first_str[index] << word
+				end
+			end 
+		end
+		#puts first_str.inspect
+	end
+	combination_of_digits[3..5].each_with_index do |combi, index|
+		load_words_from_dictionary.each do |word|
+			if  combi.length == 3 && word.length == combi.length
+				if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase)
+					sec_str[index] = [] if sec_str[index].nil?
+					sec_str[index] << word
+				end
+			elsif combi.length == 4 && word.length == combi.length
+				if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase) && int_mapping_char[combi[3].to_i].include?(word[3].downcase)
+					sec_str[index] = [] if sec_str[index].nil?
+					sec_str[index] << word
+				end
+			end 
+		end
+		#puts sec_str.inspect
+	end
+	combination_of_digits[6..7].each_with_index do |combi, index|
+		load_words_from_dictionary.each do |word|
+			if  combi.length == 3 && word.length == combi.length
+				if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase)
+					third_str[index] = [] if third_str[index].nil?
+					third_str[index] << word
+				end
+			elsif combi.length == 7 && word.length == combi.length
+				if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase)  && int_mapping_char[combi[3].to_i].include?(word[3].downcase) && int_mapping_char[combi[4].to_i].include?(word[4].downcase) && int_mapping_char[combi[5].to_i].include?(word[5].downcase) && int_mapping_char[combi[6].to_i].include?(word[6].downcase)
+					puts word
+					third_str[index] = [] if third_str[index].nil?
+					third_str[index] << word
+				end
+			end 
+		end
+		#puts third_str.inspect
+	end
+	combination_of_digits[8..10].each_with_index do |combi, index|
+		load_words_from_dictionary.each do |word|
+			if  combi.length == 3 && word.length == combi.length
+				if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase)
+					fourth_str[index] = [] if fourth_str[index].nil?
+					fourth_str[index] << word
+				end
+			elsif combi.length == 4 && word.length == combi.length
+				if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase)  && int_mapping_char[combi[3].to_i].include?(word[3].downcase)
+					fourth_str[index] = [] if fourth_str[index].nil?
+					fourth_str[index] << word
+				end
+			end 
+		end
+		#puts fourth_str.inspect
+	end
+	combination_of_digits[11..12].each_with_index do |combi, index|
+		load_words_from_dictionary.each do |word|
+			if  combi.length == 4 && word.length == combi.length
+				if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase) && int_mapping_char[combi[3].to_i].include?(word[3].downcase)
+					fifth_str[index] = [] if fifth_str[index].nil?
+					fifth_str[index] << word
+				end
+			elsif combi.length == 6 && word.length == combi.length
+				if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase)  && int_mapping_char[combi[3].to_i].include?(word[3].downcase)  && int_mapping_char[combi[4].to_i].include?(word[4].downcase)  && int_mapping_char[combi[5].to_i].include?(word[5].downcase)
+					fifth_str[index] = [] if fifth_str[index].nil?
+					fifth_str[index] << word
+				end
+			end 
+		end
+		puts fifth_str.inspect
+	end
+
+	combination_of_digits[13..14].each_with_index do |combi, index|
+		load_words_from_dictionary.each do |word|
+			if combi.length == 5 && word.length == combi.length
+				if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase)  && int_mapping_char[combi[3].to_i].include?(word[3].downcase)  && int_mapping_char[combi[4].to_i].include?(word[4].downcase)
+					sixth_str[index] = [] if sixth_str[index].nil?
+					sixth_str[index] << word
+				end
+			end 
+		end
+		puts sixth_str.inspect
+	end
+
+first_str[0].each do |ele1|
+	first_str[1].each do |ele2|
+		first_str[2].each do |ele3|
+			words << [ele1,ele2,ele3].join(",")
 		end
 	end
-	if word.length == 5
-		if int_mapping_char[combi_with_5[0].to_i].include?(word[0].downcase) && int_mapping_char[combi_with_5[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi_with_5[2].to_i].include?(word[2].downcase)  && int_mapping_char[combi_with_5[3].to_i].include?(word[3].downcase) && int_mapping_char[combi_with_5[4].to_i].include?(word[4].downcase) 
-			puts word
-		end
-	end
-	if word.length == 7
-		if int_mapping_char[combi_with_7[0].to_i].include?(word[0].downcase) && int_mapping_char[combi_with_7[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi_with_7[2].to_i].include?(word[2].downcase)  && int_mapping_char[combi_with_7[3].to_i].include?(word[3].downcase) && int_mapping_char[combi_with_7[4].to_i].include?(word[4].downcase) && int_mapping_char[combi_with_7[5].to_i].include?(word[5].downcase) && int_mapping_char[combi_with_7[6].to_i].include?(word[6].downcase)
-			puts word
-		end
-	end
-	if word.length == 10
-		if int_mapping_char[combi_with_10[0].to_i].include?(word[0].downcase) && int_mapping_char[combi_with_10[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi_with_10[2].to_i].include?(word[2].downcase)  && int_mapping_char[combi_with_10[3].to_i].include?(word[3].downcase) && int_mapping_char[combi_with_10[4].to_i].include?(word[4].downcase) && int_mapping_char[combi_with_10[5].to_i].include?(word[5].downcase) && int_mapping_char[combi_with_10[6].to_i].include?(word[6].downcase)
-			puts word
+end
+sec_str[0].each do |ele1|
+	sec_str[1].each do |ele2|
+		sec_str[2].each do |ele3|
+			words << [ele1,ele2,ele3].join(",")
 		end
 	end
 end
 
-#print words.uniq.inspect
+fourth_str[0].each do |ele1|
+	fourth_str[1].each do |ele2|
+		fourth_str[2].each do |ele3|
+			words << [ele1,ele2, ele3].join(",")
+		end
+	end
+end
 
-#print load_words_from_dictionary
+fifth_str[0].each do |ele1|
+	fifth_str[1].each do |ele2|
+			words << [ele1,ele2].join(",")
+	end
+end
+
+sixth_str[0].each do |ele1|
+	sixth_str[1].each do |ele2|
+			words << [ele1,ele2].join(",")
+	end
+end
+	# if word.length == 4
+	# 	combi_with_4.uniq.each do |combi|
+	# 		if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase)  && int_mapping_char[combi[3].to_i].include?(word[3].downcase)
+	# 			words_with_4 <<  word
+	# 		end
+	# 	end 
+	# end
+	# if word.length == 5
+	# 	combi_with_5.uniq.each do |combi|
+	# 		if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase)  && int_mapping_char[combi[3].to_i].include?(word[3].downcase) && int_mapping_char[combi[4].to_i].include?(word[4].downcase) 
+	# 			#words_with_5 << word
+	# 		end
+	# 	end
+	# end
+	# if word.length == 6
+	# 	combi_with_6.uniq.each do |combi|
+	# 		if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase)  && int_mapping_char[combi[3].to_i].include?(word[3].downcase) && int_mapping_char[combi[4].to_i].include?(word[4].downcase) && int_mapping_char[combi[5].to_i].include?(word[5].downcase)
+	# 			#words_with_6 << word
+	# 		end
+	# 	end
+	# end
+	# if word.length == 7
+	# 	combi_with_7.uniq.each do |combi|
+	# 		if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase)  && int_mapping_char[combi[3].to_i].include?(word[3].downcase) && int_mapping_char[combi[4].to_i].include?(word[4].downcase) && int_mapping_char[combi[5].to_i].include?(word[5].downcase) && int_mapping_char[combi[6].to_i].include?(word[6].downcase)
+	# 			#words_with_7 << word
+	# 		end
+	# 	end
+	# end
+	# if word.length == 10
+	# 	if int_mapping_char[combi_with_10[0].to_i].include?(word[0].downcase) && int_mapping_char[combi_with_10[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi_with_10[2].to_i].include?(word[2].downcase)  && int_mapping_char[combi_with_10[3].to_i].include?(word[3].downcase) && int_mapping_char[combi_with_10[4].to_i].include?(word[4].downcase) && int_mapping_char[combi_with_10[5].to_i].include?(word[5].downcase) && int_mapping_char[combi_with_10[6].to_i].include?(word[6].downcase)
+	# 		#words_with_10 << word
+	# 	end
+	# end
+
+# combination_of_split.each do |combination|
+# 	combination.each do |i|
+# 		# if i == 3
+# 		# 	words << 
+# 		# elsif i == 4
+# 		# elsif i == 5
+# 		# 	words_with_5.each do |ww|
+# 		# 		words << "#{ww}, #{}"
+# 		# 	end
+# 		# elsif i == 6	
+# 		# end	
+# 	end
+# end
+print words.uniq.inspect
