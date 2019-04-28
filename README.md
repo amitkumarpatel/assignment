@@ -12,15 +12,18 @@ output = ["CATAMOUNTS", "ACT,BOO,TOTS", "ACT,BOO,TOUR", "ACT,CON,TOTS", "ACT,CON
 
 Steps explained
 
-a) get the input of 10 digit number
-b) validate iput to be a proper phone number else display messge to provide proper phone number
+a) get the input of 10 digit number.
+
+b) validate iput to be a proper phone number else display messge to provide proper phone number.
+
 c) get the combination of numbers that are possible to generate words from dictionary
 	 The function get_combination_of_number() returns the required array
 	for 6686787825
 	output ["668", "678", "7825", "668", "6787", "825", "6686", "787", "825", "668", "6787825", "6686787", "825", "6686", "787825", "668678", "7825", "66867", "87825", "6686787825"]
 
 d) load the words from dictionary in to different variables as the word size
-	 The function load_words_dictionary() loads the words from dictionary
+	 The function load_words_dictionary() loads the words from dictionary.
+
 e) get words combination for each of the number combination string above. 
     Example:
      for "668" words: MOT, NOT, OOT
