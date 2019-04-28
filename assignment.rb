@@ -41,11 +41,14 @@ end
 #function joins words to generate the desired output
 def make_words(str)
 	words = []
-	if !str.compact[0].nil? && !str.compact[1].nil?
-		str[0].compact.each do |ele1|
-			str.compact[1].each do |ele2|
-				words << [ele1,ele2].join(",")
+	(0..2).each do |count|
+		if !str.compact[0].nil? && !str.compact[1].nil?
+			str[0].compact.each do |ele1|
+				str.compact[1].each do |ele2|
+					words << [ele1,ele2].join(",") if ele1.size + ele2.size == 10
+				end
 			end
+			str.shift(2)
 		end
 	end
 	words
@@ -54,19 +57,19 @@ end
 # function to loop in all the combinations of digits and returns the words from dictionary
 def combination_of_words(combination_of_digits, first_characters_of_word, int_mapping_char)
 	words = []
-	first_str, third_str, fifth_str, sixth_str = [], [], [], []
+	first_str_arr, third_str_arr, fourth_str_arr, fifth_str_arr = [], [], [], []
 	loaded_words_3chars, loaded_words_4chars, loaded_words_5chars, loaded_words_6chars, loaded_words_7chars, loaded_words_10chars = load_words_dictionary(first_characters_of_word.uniq)
 	combination_of_digits.each_with_index do |combi, index|
 		if  combi.length == 3
 			loaded_words_3chars.each do |word|
 				if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase)
 					if index == 0 || index == 1 || index == 3 || index == 5 || index == 7 || index == 8
-						first_str[index] = [] if first_str[index].nil?
-						first_str[index] << word
+						first_str_arr[index] = [] if first_str_arr[index].nil?
+						first_str_arr[index] << word
 					end
 					 if index == 9 || index == 12
-						third_str[index] = [] if third_str[index].nil?
-						third_str[index] << word
+						third_str_arr[index] = [] if third_str_arr[index].nil?
+						third_str_arr[index] << word
 					end
 				end
 			end
@@ -75,12 +78,12 @@ def combination_of_words(combination_of_digits, first_characters_of_word, int_ma
 			loaded_words_4chars.each do |word|
 				if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase) && int_mapping_char[combi[3].to_i].include?(word[3].downcase)
 					if index == 2 || index == 4 || index == 6
-						first_str[index] = [] if first_str[index].nil?
-						first_str[index] << word
+						first_str_arr[index] = [] if first_str_arr[index].nil?
+						first_str_arr[index] << word
 					end
 					if index == 13 || index == 16	
-						fifth_str[index] = [] if fifth_str[index].nil?
-						fifth_str[index] << word
+						fourth_str_arr[index] = [] if fourth_str_arr[index].nil?
+						fourth_str_arr[index] << word
 					end
 				end
 			end
@@ -88,24 +91,24 @@ def combination_of_words(combination_of_digits, first_characters_of_word, int_ma
 		if combi.length == 7
 			loaded_words_7chars.each do |word|
 				if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase)  && int_mapping_char[combi[3].to_i].include?(word[3].downcase) && int_mapping_char[combi[4].to_i].include?(word[4].downcase) && int_mapping_char[combi[5].to_i].include?(word[5].downcase) && int_mapping_char[combi[6].to_i].include?(word[6].downcase)
-					third_str[index] = [] if third_str[index].nil?
-					third_str[index] << word
+					third_str_arr[index] = [] if third_str_arr[index].nil?
+					third_str_arr[index] << word
 				end
 			end
 		end
 		if combi.length == 5
 			loaded_words_5chars.each do |word|
 				if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase)  && int_mapping_char[combi[3].to_i].include?(word[3].downcase) && int_mapping_char[combi[4].to_i].include?(word[4].downcase)
-					sixth_str[index] = [] if sixth_str[index].nil?
-					sixth_str[index] << word
+					fifth_str_arr[index] = [] if fifth_str_arr[index].nil?
+					fifth_str_arr[index] << word
 				end
 			end
 		end
 		if combi.length == 6
 			loaded_words_6chars.each do |word|
 				if int_mapping_char[combi[0].to_i].include?(word[0].downcase) && int_mapping_char[combi[1].to_i].include?(word[1].downcase)  && int_mapping_char[combi[2].to_i].include?(word[2].downcase)  && int_mapping_char[combi[3].to_i].include?(word[3].downcase) && int_mapping_char[combi[4].to_i].include?(word[4].downcase) && int_mapping_char[combi[5].to_i].include?(word[5].downcase)
-					fifth_str[index] = [] if fifth_str[index].nil?
-					fifth_str[index] << word
+					fourth_str_arr[index] = [] if fourth_str_arr[index].nil?
+					fourth_str_arr[index] << word
 				end
 			end
 		end
@@ -117,18 +120,21 @@ def combination_of_words(combination_of_digits, first_characters_of_word, int_ma
 			end
 		end
 	end
-	if !first_str[0].nil? && !first_str.compact[1].nil? && !first_str.compact[2].nil?
-		first_str[0].each do |ele1|
-			first_str.compact[1].each do |ele2|
-				first_str.compact[2].each do |ele3|
-					words << [ele1,ele2,ele3].join(",")
+	(0..2).each do |count|
+		if !first_str_arr[0].nil? && !first_str_arr.compact[1].nil? && !first_str_arr.compact[2].nil?
+			first_str_arr[0].each do |ele1|
+				first_str_arr.compact[1].each do |ele2|
+					first_str_arr.compact[2].each do |ele3|
+						words << [ele1,ele2,ele3].join(",") if ele1.size + ele2.size + ele3.size == 10
+					end
 				end
 			end
+			first_str_arr.shift(3)
 		end
 	end
-	words << make_words(third_str.compact)
-	words << make_words(fifth_str.compact)
-	words << make_words(sixth_str.compact)
+	words << make_words(third_str_arr.compact)
+	words << make_words(fourth_str_arr.compact)
+	words << make_words(fifth_str_arr.compact)
 	words
 end
 
