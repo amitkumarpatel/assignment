@@ -11,6 +11,7 @@ input = 2282668687
 output = ["CATAMOUNTS", "ACT,BOO,TOTS", "ACT,BOO,TOUR", "ACT,CON,TOTS", "ACT,CON,TOUR", "ACT,COO,TOTS", "ACT,COO,TOUR", "BAT,BOO,TOTS", "BAT,BOO,TOUR", "BAT,CON,TOTS", "BAT,CON,TOUR", "BAT,COO,TOTS", "BAT,COO,TOUR", "CAT,BOO,TOTS", "CAT,BOO,TOUR", "CAT,CON,TOTS", "CAT,CON,TOUR", "CAT,COO,TOTS", "CAT,COO,TOUR", "ACT,AMOUNTS", "ACT,CONTOUR", "BAT,AMOUNTS", "BAT,CONTOUR", "CAT,AMOUNTS", "CAT,CONTOUR", "ACTA,MOUNTS"]
 
 Steps explained
+
 a) get the input of 10 digit number
 b) validate iput to be a proper phone number else display messge to provide proper phone number
 c) get the combination of numbers that are possible to generate words from dictionary
